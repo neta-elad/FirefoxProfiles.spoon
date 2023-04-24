@@ -8,7 +8,7 @@ setmetatable(obj, obj)
 
 -- Metadata
 obj.name = "FirefoxProfiles"
-obj.version = "0.0.1"
+obj.version = "0.0.2"
 obj.author = "Neta Elad <elad.neta@gmail.com>"
 obj.homepage = "https://github.com/netaelad/FirefoxProfiles"
 obj.license = "MIT - https://opensource.org/licenses/MIT"
