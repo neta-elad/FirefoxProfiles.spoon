@@ -1,0 +1,41 @@
+[
+  {
+    "Constant" : [
+
+    ],
+    "submodules" : [
+
+    ],
+    "Function" : [
+
+    ],
+    "Variable" : [
+
+    ],
+    "stripped_doc" : [
+
+    ],
+    "Deprecated" : [
+
+    ],
+    "type" : "Module",
+    "desc" : "A menubar applet to open Firefox profiles",
+    "Constructor" : [
+
+    ],
+    "Field" : [
+
+    ],
+    "doc" : "A menubar applet to open Firefox profiles",
+    "Command" : [
+
+    ],
+    "Method" : [
+
+    ],
+    "items" : [
+
+    ],
+    "name" : "FirefoxProfiles"
+  }
+]
