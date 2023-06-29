@@ -15,19 +15,15 @@
     "stripped_doc" : [
 
     ],
+    "desc" : "A menubar applet to open Firefox profiles",
     "Deprecated" : [
 
     ],
     "type" : "Module",
-    "desc" : "A menubar applet to open Firefox profiles",
     "Constructor" : [
 
     ],
     "Field" : [
-
-    ],
-    "doc" : "A menubar applet to open Firefox profiles",
-    "Command" : [
 
     ],
     "Method" : [
@@ -36,6 +32,10 @@
     "items" : [
 
     ],
+    "Command" : [
+
+    ],
+    "doc" : "A menubar applet to open Firefox profiles",
     "name" : "FirefoxProfiles"
   }
 ]
