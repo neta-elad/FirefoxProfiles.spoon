@@ -8,7 +8,7 @@ setmetatable(obj, obj)
 
 -- Metadata
 obj.name = "FirefoxProfiles"
-obj.version = "0.0.2"
+obj.version = "0.0.3"
 obj.author = "Neta Elad <elad.neta@gmail.com>"
 obj.homepage = "https://github.com/netaelad/FirefoxProfiles"
 obj.license = "MIT - https://opensource.org/licenses/MIT"
@@ -42,20 +42,7 @@ local function startProfile(profile)
     }):start()
 end
 
-local function isProfileActive(profile)
-    return not hs.settings.get("FirefoxProfiles/" .. profile)
-end
-
-local function toggleProfile(profile)
-    hs.settings.set("FirefoxProfiles/" .. profile, isProfileActive(profile))
-end
-
 -- Private
-function obj:_toggleProfile(profile)
-    toggleProfile(profile)
-    self:_refresh()
-end
-
 function obj:_onChoice(choice)
     if choice ~= nil then
         startProfile(choice.text)
@@ -67,50 +54,11 @@ function obj:_startChooser()
     self.chooser:show()
 end
 
-function obj:_buildMenuTable()
-    local menuTable = {}
-
-    for _, profile in ipairs(self.profiles) do
-        local active = isProfileActive(profile)
-        local state = active and "on" or "mixed"
-        table.insert(menuTable, { 
-            title = profile, 
-            state = state, 
-            profile = profile,
-            menu = {
-                {
-                    title = "Start",
-                    disabled = not active,
-                    fn = hs.fnutils.partial(startProfile, profile),
-                },
-                {
-                    title = active and "Disable" or "Enable",
-                    fn = hs.fnutils.partial(self._toggleProfile, self, profile)
-                }
-            }
-        })
-    end
-
-    table.insert(menuTable, { title = "-" })
-    table.insert(menuTable, { 
-        title = "Chooser", 
-        fn = hs.fnutils.partial(self._startChooser, self) 
-    })
-
-    return menuTable
-end
-
-function obj:_refreshMenu()
-    self.menubar:setMenu(self:_buildMenuTable())
-end
-
 function obj:_buildChoices()
     local choices = {}
 
     for _, profile in ipairs(self.profiles) do
-        if isProfileActive(profile) then
-            table.insert(choices, { text = profile })
-        end
+        table.insert(choices, { text = profile })
     end
 
     return choices
@@ -133,7 +81,6 @@ function obj:_refreshChoices()
 end
 
 function obj:_refresh()
-    self:_refreshMenu()
     self:_refreshChoices()
 end
 
@@ -145,6 +92,8 @@ function obj:init()
 
     local icon = hs.image.imageFromAppBundle("org.mozilla.firefox"):size({ w = 20, h = 20 })
     self.menubar:setIcon(icon, false)
+    self.menubar:setTooltip("Firefox Profiles")
+    self.menubar:setClickCallback(hs.fnutils.partial(self._startChooser, self))
 
     self.chooser = self:_buildChooser()
 
